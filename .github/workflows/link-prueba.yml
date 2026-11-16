@@ -1,0 +1,14 @@
+name: link-prueba
+# Prueba minima de LINK: confirma que GitHub Actions corre en este fork. No compila nada.
+on:
+  push:
+    branches: [link]
+    paths: ['.github/workflows/link-prueba.yml']
+  workflow_dispatch:
+permissions: {}
+jobs:
+  prueba:
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - run: echo "Actions funciona en el fork de LINK"
