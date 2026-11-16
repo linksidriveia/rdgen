@@ -30,6 +30,15 @@ Así un cambio en el repositorio original no entra en una compilación sin revis
 Además se quitó `docker-build.yml`: publicaba una imagen en Docker Hub en cada subida a
 `master` y este fork no publica imágenes (la del servicio se construye con el `Dockerfile`).
 
+Además, los pasos que bajan y suben artefactos entre trabajos usaban en el original
+`actions/download-artifact@master` y `actions/upload-artifact@master`. Esas ramas `master`
+quedaron congeladas en 2020 (versión 2 de las acciones) y ya no ven los artefactos que sube
+`actions/upload-artifact` v7: la primera compilación de LINK (16/11/2026, corrida 43806040927)
+falló en "Restore bridge files" con "Unable to list artifacts for the run". En este fork esos
+pasos usan las mismas versiones que el resto de los flujos, fijadas por commit:
+`actions/download-artifact` v4 y `actions/upload-artifact` v7. Al traer novedades del original,
+no volver a `@master` en esas acciones.
+
 ## Qué no va en este repositorio
 
 Contraseñas, tokens ni claves. El token de GitHub y la clave del zip viven solo en el
